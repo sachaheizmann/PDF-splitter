@@ -76,3 +76,4 @@ Split all PDFs in the folder into 15-page parts:
 ```
 pdfsplit --all --pages 15
 ```
+
