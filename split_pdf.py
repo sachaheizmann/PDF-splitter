@@ -5,7 +5,6 @@ import argparse
 
 # --- Config ---
 working_dir = Path(".")
-output_root = Path("output_slides")
 
 # --- Helpers ---
 def safe_move_pdf(pdf_path: Path, target_folder: Path) -> Path:
@@ -36,7 +35,7 @@ def split_pdf(input_path: Path, output_dir: Path, chunk_size: int):
         part_path = output_dir / f"{base_name}-part{i // chunk_size + 1}.pdf"
         with open(part_path, "wb") as f:
             writer.write(f)
-        print(f"Saved: {part_path}")
+        print(f"✅ Saved: {part_path}")
 
 # --- Main ---
 def main():
@@ -48,12 +47,11 @@ def main():
 
     args = parser.parse_args()
     pages_per_split = args.pages
-    output_root.mkdir(exist_ok=True)
 
     if args.all:
         for pdf_path in working_dir.glob("*.pdf"):
             folder_name = pdf_path.stem
-            target_folder = output_root / folder_name
+            target_folder = working_dir / folder_name
             final_pdf_path = safe_move_pdf(pdf_path, target_folder)
             if "-part" in final_pdf_path.stem:
                 continue
@@ -62,10 +60,10 @@ def main():
     elif args.file:
         pdf_path = Path(args.file)
         if not pdf_path.exists():
-            print(f"Error: File '{args.file}' not found.")
+            print(f"❌ Error: File '{args.file}' not found.")
             return
         folder_name = pdf_path.stem
-        target_folder = output_root / folder_name
+        target_folder = working_dir / folder_name
         final_pdf_path = safe_move_pdf(pdf_path, target_folder)
         split_pdf(final_pdf_path, target_folder, pages_per_split)
 
