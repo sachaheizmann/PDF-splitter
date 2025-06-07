@@ -1,37 +1,56 @@
-# PDF Slide Splitter
+# 📄 PDFSplit – Command-Line PDF Splitter
 
-Split each PDF in a folder into smaller chunks (e.g. 15 pages each), organize them in folders, and rename duplicates if needed. Perfect for chatgpt summaries since he has trouble summarizing big PDFs.
+Split long PDFs (lecture slides, books, papers) into smaller, manageable chunks — ideal for summarizing with **ChatGPT** or **Claude**.
 
-## Features
+✅ Cross-platform  
+✅ No install needed  
+✅ Works fully offline  
+✅ Just download and run
 
-- Automatically finds all PDFs in the current folder
-- Creates a folder named after each PDF (without `.pdf`)
-- Moves the original PDF into its folder
-- Splits it into `-part1`, `-part2`, etc.
-- If a folder or file exists, it safely skips or renames
+---
 
-## Usage
+## Quick Start
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/sachaheizmann/PDF-splitter.git
-cd PDF-splitter
+### Step 1: Download
 
-# 2. Set up a virtual environment (optional)
-python3 -m venv venv
-source venv/bin/activate
+Get the latest version from the [Releases page](https://github.com/sachaheizmann/PDF-splitter/releases):
 
-# 3. Install dependencies
-pip install -r requirements.txt
-```
+| OS        | File name              |
+|-----------|-------------------------|
+| Windows   | `pdfsplit-windows.exe`   |
+| macOS     | `pdfsplit-macos`         |
+| Linux     | `pdfsplit-linux`         |
 
-```bash
-# 4. Add your PDFs to this folder
-```
-```bash
-# 5. Run the script
-python split_pdf.py
+---
 
-```
+### Step 2: One-Time Setup (Run from Anywhere)
+
+#### Windows
+
+1. Rename `pdfsplit-windows.exe` → `pdfsplit.exe`
+2. Move it to `C:\Program Files\PDFSplit\`
+3. Add that folder to your **System PATH**:
+   - Search for "Environment Variables"
+   - Edit system `Path`, click "New", and add:
+     ```
+     C:\Program Files\PDFSplit\
+     ```
+4. Open a new **Command Prompt** and run:
+
+```cmd
+pdfsplit --help
 
 
+#### macOS
+run
+``
+chmod +x ~/Downloads/pdfsplit-macos
+sudo mv ~/Downloads/pdfsplit-macos /usr/local/bin/pdfsplit
+``
+If blocked on first run:
+
+xattr -dr com.apple.quarantine /usr/local/bin/pdfsplit
+
+✅ Now run from anywhere:
+
+pdfsplit --help
