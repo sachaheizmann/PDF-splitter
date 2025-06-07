@@ -3,10 +3,10 @@ name: Build and Release PDFSplit
 on:
   push:
     tags:
-      - 'v*'  # e.g., v1.0.0
+      - 'v*'  # Triggers on version tags like v1.0.0
 
 permissions:
-  contents: write  # needed to upload release assets
+  contents: write  # Required to upload release assets
 
 jobs:
   build:
@@ -17,35 +17,39 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
 
-    - name: Install dependencies
-      run: pip install pypdf pyinstaller
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
 
-    - name: Build binary
-      run: |
-        pyinstaller split_pdf.py --onefile --name pdfsplit
+      - name: Build executable
+        run: |
+          pyinstaller split_pdf.py --onefile --name pdfsplit
 
-    - name: Rename binary
-      run: |
-        mkdir output
-        if [[ "${{ runner.os }}" == "Windows" ]]; then
-          mv dist/pdfsplit.exe output/pdfsplit-windows.exe
-        elif [[ "${{ runner.os }}" == "macOS" ]]; then
-          mv dist/pdfsplit output/pdfsplit-macos
-        else
-          mv dist/pdfsplit output/pdfsplit-linux
-        fi
-      shell: bash
+      - name: Rename and prepare binary
+        run: |
+          mkdir output
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            mv dist/pdfsplit.exe output/pdfsplit-windows.exe
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            mv dist/pdfsplit output/pdfsplit-macos
+          else
+            mv dist/pdfsplit output/pdfsplit-linux
+          fi
+        shell: bash
 
-    - name: Upload release binaries
-      uses: softprops/action-gh-release@v1
-      with:
-        files: output/*
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload release binaries
+        uses: softprops/action-gh-release@v1
+        with:
+          files: output/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
