@@ -36,17 +36,17 @@ def split_pdf(input_path: Path, output_dir: Path, chunk_size: int):
         part_path = output_dir / f"{base_name}-part{i // chunk_size + 1}.pdf"
         with open(part_path, "wb") as f:
             writer.write(f)
-        print(f"✅ Saved: {part_path}")
+        print(f"Saved: {part_path}")
 
 # --- Main ---
 def main():
     parser = argparse.ArgumentParser(description="Split PDF files into smaller chunks.")
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--all", action="store_true", help="Split all PDF files in the current folder.")
-    group.add_argument("--file", type=str, help="Path to a single PDF file to split.")
-    parser.add_argument("--pages", type=int, default=15, help="Number of pages per output file.")
-    args = parser.parse_args()
+    group.add_argument("-a", "--all", action="store_true", help="Split all PDF files in the current folder.")
+    group.add_argument("-f", "--file", type=str, help="Path to a single PDF file to split.")
+    parser.add_argument("-p", "--pages", type=int, default=15, help="Number of pages per output file (default: 15).")
 
+    args = parser.parse_args()
     pages_per_split = args.pages
     output_root.mkdir(exist_ok=True)
 
@@ -62,7 +62,7 @@ def main():
     elif args.file:
         pdf_path = Path(args.file)
         if not pdf_path.exists():
-            print(f"❌ Error: File '{args.file}' not found.")
+            print(f"Error: File '{args.file}' not found.")
             return
         folder_name = pdf_path.stem
         target_folder = output_root / folder_name
