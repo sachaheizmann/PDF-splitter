@@ -1,9 +1,12 @@
-name: Build & Release PDFSplit
+name: Build and Release PDFSplit
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*'  # e.g., v1.0.0
+
+permissions:
+  contents: write  # needed to upload release assets
 
 jobs:
   build:
@@ -28,8 +31,21 @@ jobs:
       run: |
         pyinstaller split_pdf.py --onefile --name pdfsplit
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
+    - name: Rename binary
+      run: |
+        mkdir output
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          mv dist/pdfsplit.exe output/pdfsplit-windows.exe
+        elif [[ "${{ runner.os }}" == "macOS" ]]; then
+          mv dist/pdfsplit output/pdfsplit-macos
+        else
+          mv dist/pdfsplit output/pdfsplit-linux
+        fi
+      shell: bash
+
+    - name: Upload release binaries
+      uses: softprops/action-gh-release@v1
       with:
-        name: pdfsplit-${{ runner.os }}
-        path: dist/pdfsplit*
+        files: output/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
