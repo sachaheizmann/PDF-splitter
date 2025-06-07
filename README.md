@@ -29,7 +29,7 @@ Follow the steps for your OS OR get the latest version from the [Releases page](
 
 1. run
    ```cmd
-   Invoke-WebRequest -Uri "https://github.com/sachaheizmann/PDF-splitter/releases/download/v1.0.3/pdfsplit-windows.exe" -OutFile "$env:USERPROFILE\Downloads\pdfsplit.exe"
+   Invoke-WebRequest -Uri "https://github.com/sachaheizmann/pdfsplit/releases/download/v1.0.3/pdfsplit-windows.exe" -OutFile "$env:USERPROFILE\Downloads\pdfsplit.exe"
    ```
 2. Move it to `C:\Program Files\PDFSplit\`
 3. Add that folder to your **System PATH**:
@@ -47,7 +47,7 @@ pdfsplit --help
 #### macOS
 run
 ```
-wget https://github.com/sachaheizmann/PDF-splitter/releases/download/v1.0.3/pdfsplit-macos -O pdfsplit
+wget https://github.com/sachaheizmann/pdfsplit/releases/download/v1.0.3/pdfsplit-macos -O pdfsplit
 chmod +x pdfsplit
 sudo mv pdfsplit /usr/local/bin/pdfsplit
 ```
@@ -63,7 +63,7 @@ pdfsplit --help
 #### Linux
 run
 ```
-wget https://github.com/sachaheizmann/PDF-splitter/releases/download/v1.0.3/pdfsplit-linux -O pdfsplit
+wget https://github.com/sachaheizmann/pdfsplit/releases/download/v1.0.3/pdfsplit-linux -O pdfsplit
 chmod +x pdfsplit
 sudo mv pdfsplit /usr/local/bin/pdfsplit
 ```
