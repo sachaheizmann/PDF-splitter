@@ -13,7 +13,7 @@ Just download and run
 
 ### Step 1: Download
 
-Get the latest version from the [Releases page](https://github.com/sachaheizmann/pdfsplit/releases):
+Follow the steps for your OS OR get the latest version from the [Releases page](https://github.com/sachaheizmann/pdfsplit/releases):
 
 | OS        | File name              |
 |-----------|-------------------------|
@@ -27,7 +27,10 @@ Get the latest version from the [Releases page](https://github.com/sachaheizmann
 
 #### Windows
 
-1. Rename `pdfsplit-windows.exe` → `pdfsplit.exe`
+1. run
+   ```cmd
+   Invoke-WebRequest -Uri "https://github.com/sachaheizmann/PDF-splitter/releases/download/v1.0.3/pdfsplit-windows.exe" -OutFile "$env:USERPROFILE\Downloads\pdfsplit.exe"
+   ```
 2. Move it to `C:\Program Files\PDFSplit\`
 3. Add that folder to your **System PATH**:
    - Search for "Environment Variables"
@@ -44,8 +47,9 @@ pdfsplit --help
 #### macOS
 run
 ```
-chmod +x ~/Downloads/pdfsplit-macos
-sudo mv ~/Downloads/pdfsplit-macos /usr/local/bin/pdfsplit
+wget https://github.com/sachaheizmann/PDF-splitter/releases/download/v1.0.3/pdfsplit-macos -O pdfsplit
+chmod +x pdfsplit
+sudo mv pdfsplit /usr/local/bin/pdfsplit
 ```
 If blocked on first run:
 ```
@@ -59,8 +63,9 @@ pdfsplit --help
 #### Linux
 run
 ```
-chmod +x ~/Downloads/pdfsplit-linux
-sudo mv ~/Downloads/pdfsplit-linux /usr/local/bin/pdfsplit
+wget https://github.com/sachaheizmann/PDF-splitter/releases/download/v1.0.3/pdfsplit-linux -O pdfsplit
+chmod +x pdfsplit
+sudo mv pdfsplit /usr/local/bin/pdfsplit
 ```
 Then try:
 ```
