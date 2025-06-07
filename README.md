@@ -1,4 +1,4 @@
-# PDFSplit – Command-Line PDF Splitter
+# pdfsplit – Command-Line PDF Splitter
 
 Split long PDFs (lecture slides, books, papers) into smaller, manageable chunks — ideal for summarizing with **ChatGPT** or **Claude**.
 
@@ -13,7 +13,7 @@ Just download and run
 
 ### Step 1: Download
 
-Get the latest version from the [Releases page](https://github.com/sachaheizmann/PDF-splitter/releases):
+Get the latest version from the [Releases page](https://github.com/sachaheizmann/pdfsplit/releases):
 
 | OS        | File name              |
 |-----------|-------------------------|
