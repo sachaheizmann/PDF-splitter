@@ -57,6 +57,7 @@ pdfsplit --help
 ```
 
 #### Linux
+run
 ```
 chmod +x ~/Downloads/pdfsplit-linux
 sudo mv ~/Downloads/pdfsplit-linux /usr/local/bin/pdfsplit
