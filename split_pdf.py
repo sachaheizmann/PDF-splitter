@@ -35,7 +35,7 @@ def split_pdf(input_path: Path, output_dir: Path, chunk_size: int):
         part_path = output_dir / f"{base_name}-part{i // chunk_size + 1}.pdf"
         with open(part_path, "wb") as f:
             writer.write(f)
-        print(f"✅ Saved: {part_path}")
+        print(f"Saved: {part_path}")
 
 # --- Main ---
 def main():
@@ -60,7 +60,7 @@ def main():
     elif args.file:
         pdf_path = Path(args.file)
         if not pdf_path.exists():
-            print(f"❌ Error: File '{args.file}' not found.")
+            print(f"Error: File '{args.file}' not found.")
             return
         folder_name = pdf_path.stem
         target_folder = working_dir / folder_name
