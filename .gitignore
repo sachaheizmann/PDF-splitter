@@ -3,3 +3,8 @@ __pycache__/
 *.pyc
 *.DS_Store
 output_slides/
+dist/
+build/
+*.spec
+*.exe
+*.app

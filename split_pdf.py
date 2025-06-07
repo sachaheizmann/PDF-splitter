@@ -1,10 +1,10 @@
 from pathlib import Path
 from pypdf import PdfReader, PdfWriter
 import shutil
+import argparse
 
 # --- Config ---
 working_dir = Path(".")
-pages_per_split = 15
 output_root = Path("output_slides")
 
 # --- Helpers ---
@@ -36,24 +36,38 @@ def split_pdf(input_path: Path, output_dir: Path, chunk_size: int):
         part_path = output_dir / f"{base_name}-part{i // chunk_size + 1}.pdf"
         with open(part_path, "wb") as f:
             writer.write(f)
-        print(f"Saved: {part_path}")
+        print(f"✅ Saved: {part_path}")
 
 # --- Main ---
-def process_all_pdfs():
+def main():
+    parser = argparse.ArgumentParser(description="Split PDF files into smaller chunks.")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--all", action="store_true", help="Split all PDF files in the current folder.")
+    group.add_argument("--file", type=str, help="Path to a single PDF file to split.")
+    parser.add_argument("--pages", type=int, default=15, help="Number of pages per output file.")
+    args = parser.parse_args()
+
+    pages_per_split = args.pages
     output_root.mkdir(exist_ok=True)
-    for pdf_path in working_dir.glob("*.pdf"):
+
+    if args.all:
+        for pdf_path in working_dir.glob("*.pdf"):
+            folder_name = pdf_path.stem
+            target_folder = output_root / folder_name
+            final_pdf_path = safe_move_pdf(pdf_path, target_folder)
+            if "-part" in final_pdf_path.stem:
+                continue
+            split_pdf(final_pdf_path, target_folder, pages_per_split)
+
+    elif args.file:
+        pdf_path = Path(args.file)
+        if not pdf_path.exists():
+            print(f"❌ Error: File '{args.file}' not found.")
+            return
         folder_name = pdf_path.stem
         target_folder = output_root / folder_name
-
-        # Move original PDF into its output folder
         final_pdf_path = safe_move_pdf(pdf_path, target_folder)
-
-        # Skip already-split files
-        if "-part" in final_pdf_path.stem:
-            continue
-
-        # Split
         split_pdf(final_pdf_path, target_folder, pages_per_split)
 
 if __name__ == "__main__":
-    process_all_pdfs()
+    main()
