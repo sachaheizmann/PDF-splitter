@@ -14,8 +14,8 @@ Split each PDF in a folder into smaller chunks (e.g. 15 pages each), organize th
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/pdf-splitter.git
-cd pdf-splitter
+git clone https://github.com/sachaheizmann/PDF-splitter.git
+cd PDF-splitter
 
 # 2. Set up a virtual environment (optional)
 python3 -m venv venv
@@ -23,9 +23,15 @@ source venv/bin/activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
+```
 
+```bash
 # 4. Add your PDFs to this folder
-
+```
+```bash
 # 5. Run the script
 python split_pdf.py
+
+```
+
 
