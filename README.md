@@ -1,6 +1,6 @@
 # PDF Slide Splitter
 
-Split each PDF in a folder into smaller chunks (e.g. 15 pages each), organize them in folders, and rename duplicates if needed.
+Split each PDF in a folder into smaller chunks (e.g. 15 pages each), organize them in folders, and rename duplicates if needed. Perfect for chatgpt summaries since he has trouble summarizing big PDFs.
 
 ## Features
 

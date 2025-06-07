@@ -2,19 +2,20 @@ from pathlib import Path
 from pypdf import PdfReader, PdfWriter
 import shutil
 
-# CONFIG
+# --- Config ---
 working_dir = Path(".")
 pages_per_split = 15
+output_root = Path("output_slides")
 
+# --- Helpers ---
 def safe_move_pdf(pdf_path: Path, target_folder: Path) -> Path:
-    target_folder.mkdir(exist_ok=True)
+    target_folder.mkdir(parents=True, exist_ok=True)
     target_pdf_path = target_folder / pdf_path.name
 
     if not target_pdf_path.exists():
         shutil.move(str(pdf_path), target_pdf_path)
         return target_pdf_path
     else:
-        # Add suffix like -copy.pdf, -copy2.pdf, etc.
         base = pdf_path.stem
         suffix = 1
         while True:
@@ -24,7 +25,7 @@ def safe_move_pdf(pdf_path: Path, target_folder: Path) -> Path:
                 return candidate
             suffix += 1
 
-def split_pdf(input_path, output_dir, chunk_size):
+def split_pdf(input_path: Path, output_dir: Path, chunk_size: int):
     reader = PdfReader(input_path)
     total_pages = len(reader.pages)
     base_name = input_path.stem
@@ -37,18 +38,21 @@ def split_pdf(input_path, output_dir, chunk_size):
             writer.write(f)
         print(f"Saved: {part_path}")
 
+# --- Main ---
 def process_all_pdfs():
+    output_root.mkdir(exist_ok=True)
     for pdf_path in working_dir.glob("*.pdf"):
         folder_name = pdf_path.stem
-        target_folder = working_dir / folder_name
+        target_folder = output_root / folder_name
 
-        # Move PDF into folder, safely
+        # Move original PDF into its output folder
         final_pdf_path = safe_move_pdf(pdf_path, target_folder)
 
-        # Skip splitting if PDF is already split (has "-part1" already)
+        # Skip already-split files
         if "-part" in final_pdf_path.stem:
             continue
 
+        # Split
         split_pdf(final_pdf_path, target_folder, pages_per_split)
 
 if __name__ == "__main__":
