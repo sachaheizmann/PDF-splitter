@@ -17,7 +17,7 @@ Get the latest version from the [Releases page](https://github.com/sachaheizmann
 
 | OS        | File name              |
 |-----------|-------------------------|
-| Windows   | `pdfsplit-windows.exe`   |
+| Windows   |  (maybe coming soon)   |
 | macOS     | `pdfsplit-macos`         |
 | Linux     | `pdfsplit-linux`         |
 
