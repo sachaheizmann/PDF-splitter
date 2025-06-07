@@ -1,11 +1,11 @@
-# 📄 PDFSplit – Command-Line PDF Splitter
+# PDFSplit – Command-Line PDF Splitter
 
 Split long PDFs (lecture slides, books, papers) into smaller, manageable chunks — ideal for summarizing with **ChatGPT** or **Claude**.
 
-✅ Cross-platform  
-✅ No install needed  
-✅ Works fully offline  
-✅ Just download and run
+Cross-platform  
+No install needed  
+Works fully offline  
+Just download and run
 
 ---
 
@@ -39,18 +39,39 @@ Get the latest version from the [Releases page](https://github.com/sachaheizmann
 
 ```cmd
 pdfsplit --help
-
+```
 
 #### macOS
 run
-``
+```
 chmod +x ~/Downloads/pdfsplit-macos
 sudo mv ~/Downloads/pdfsplit-macos /usr/local/bin/pdfsplit
-``
+```
 If blocked on first run:
-
+```
 xattr -dr com.apple.quarantine /usr/local/bin/pdfsplit
-
-✅ Now run from anywhere:
-
+```
+Now run from anywhere:
+```
 pdfsplit --help
+```
+
+#### Linux
+```
+chmod +x ~/Downloads/pdfsplit-linux
+sudo mv ~/Downloads/pdfsplit-linux /usr/local/bin/pdfsplit
+```
+Then try:
+```
+pdfsplit --all --pages 10
+```
+
+### Usage Examples
+Split one PDF into chunks of 10 pages:
+```
+pdfsplit --file "MySlides.pdf" --pages 10
+```
+Split all PDFs in the folder into 15-page parts:
+```
+pdfsplit --all --pages 15
+```
