@@ -57,7 +57,7 @@ xattr -dr com.apple.quarantine /usr/local/bin/pdfsplit
 ```
 Now run from anywhere:
 ```
-pdfsplit --help
+pdfsplit -h
 ```
 
 #### Linux
@@ -69,16 +69,16 @@ sudo mv pdfsplit /usr/local/bin/pdfsplit
 ```
 Then try:
 ```
-pdfsplit --all --pages 10
+pdfsplit -a -p 10
 ```
 
 ### Usage Examples
 Split one PDF into chunks of 10 pages:
 ```
-pdfsplit --file "MySlides.pdf" --pages 10
+pdfsplit -f "MySlides.pdf" -p 10
 ```
 Split all PDFs in the folder into 15-page parts:
 ```
-pdfsplit --all --pages 15
+pdfsplit -all -pages 15
 ```
 
