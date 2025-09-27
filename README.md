@@ -69,7 +69,7 @@ sudo mv pdfsplit /usr/local/bin/pdfsplit
 ```
 Then try:
 ```
-pdfsplit -a -p 10
+pdfsplit -h
 ```
 
 ### Usage Examples
